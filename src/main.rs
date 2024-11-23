@@ -53,7 +53,7 @@ fn check_poh_speed(
     hash_samples: Option<u64>,
 ) -> Result<u64, String> {
     set_cpu_affinity_for_core(core_id.clone())?;
-
+    // fix me
     let hashes_per_tick = 10_000;
     let ticks_per_slot = 64;
     let ns_per_slot = 400_000_000;
