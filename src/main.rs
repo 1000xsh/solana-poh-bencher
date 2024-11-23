@@ -1,11 +1,14 @@
 use clap::{Arg, ArgAction, Command};
 use core_affinity;
+use sha2::{Digest, Sha256};
 use std::time::{Duration, Instant};
 
 fn compute_hash_time(samples: u64) -> Duration {
+    let mut hasher = Sha256::new();
     let start = Instant::now();
     for _ in 0..samples {
-        let _ = rand::random::<u64>();
+        hasher.update(rand::random::<u64>().to_le_bytes());
+        let _ = hasher.finalize_reset();
     }
     start.elapsed()
 }
